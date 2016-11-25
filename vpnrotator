@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+COMMAND[0]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 50.7.89.132 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+COMMAND[1]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 50.7.67.42 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+COMMAND[2]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 196.52.17.225 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+COMMAND[3]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 196.52.19.225 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+COMMAND[4]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 50.7.1.68 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+COMMAND[5]="/usr/sbin/openvpn --config /home/lyle/.config/proxpn/proxpn.ovpn --remote 162.253.128.68 443 udp --auth-nocache --auth-user-pass /home/lyle/.config/proxpn/login.conf"
+
+
+
+holdcommand="";
+newcommand="";
+
+
+	while [[ "$holdcommand" == "$newcommand" ]];	
+	do
+		CLENGTH=${#COMMAND[@]};
+		echo "======= command length is equal $CLENGTH =======";
+		rand=$[ $RANDOM % $CLENGTH ];
+		echo "======= random number chose $rand     =========";
+		newcommand=${COMMAND[$rand]};
+	done;
+
+
+holdcommand=$newcommand;
+export $holdcommand;
+
